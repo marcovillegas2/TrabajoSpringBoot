@@ -1,0 +1,8 @@
+1. Crear la base con database/01_crear_base_datos.sql conectado a postgres.
+2. Conectarse a tienda_ropa y ejecutar database/02_crear_tabla_y_datos.sql.
+3. Revisar las credenciales en src/main/resources/application.properties.
+4. Ejecutar: mvn spring-boot:run
+5. Verificar en consola: Conexión a PostgreSQL exitosa
+6. Probar: http://localhost:8080/api/productos
+
+Requisitos: Java 17+, Maven 3.6.3+ y PostgreSQL.

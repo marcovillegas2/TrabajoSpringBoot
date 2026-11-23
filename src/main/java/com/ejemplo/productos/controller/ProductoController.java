@@ -1,0 +1,35 @@
+package com.ejemplo.productos.controller;
+
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.ejemplo.productos.entity.Producto;
+import com.ejemplo.productos.repository.ProductoRepository;
+
+@RestController
+@RequestMapping("/api/productos")
+public class ProductoController {
+
+    private final ProductoRepository productoRepository;
+
+    public ProductoController(ProductoRepository productoRepository) {
+        this.productoRepository = productoRepository;
+    }
+
+    @GetMapping
+    public List<Producto> listarProductos() {
+        return productoRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Producto> obtenerProducto(@PathVariable Long id) {
+        return productoRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+}
